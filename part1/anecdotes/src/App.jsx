@@ -4,24 +4,33 @@ const Button = ({onClick, text}) => <button onClick={onClick}>{text}</button>
 
 const Tittle = ({text}) => <h1>{text}</h1>
 
+const Anecdote = ({anecdote, votes}) => 
+{
+  return (
+    <div>
+      <p>{anecdote}</p>
+      <p>has {votes} votes</p>
+    </div>
+  )
+}
+
 const Winner = ({anecdotes, votes}) => {
   const index = votes.indexOf(Math.max(...votes))
   const anecdote = anecdotes[index]
-  if (anecdote > 0) {
 
+  if (votes[index] > 0) {
     return (
       <div>
-        <p>{winner}</p>
-        <p>has {highestVoteCount} votes</p>
+        <p>{anecdote}</p>
+        <p>has {votes[index]} votes</p>
       </div>
     )
-} else {
+  } else {
     return (
       <p>No votes yet</p>
     )
   }  
 }
-   
 
 const App = () => {
   const anecdotes = [
@@ -49,11 +58,10 @@ const App = () => {
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(Array(anecdotes.length).fill(0))
 
-
   return (
     <div>
       <Tittle text="Anecdote of the day"/>
-      <p>{anecdotes[selected]}</p>
+      <Anecdote anecdote={anecdotes[selected]} votes={votes[selected]} />
       <Button onClick={incrementVotes} text="vote"/>
       <Button onClick={randomAnecdote} text="next anecdote"/>
       <Tittle text="Anecdote with most votes"/>
