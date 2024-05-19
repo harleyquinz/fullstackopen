@@ -12,7 +12,7 @@ const Course = ({course}) => {
     return (
       <div>
         <Header course={course} />
-        <Content course={course}/>
+        <Content course={course.parts}/>
         <Total course={course}/>
       </div>
     )
